@@ -1,7 +1,7 @@
 # **Bmsit-Bookshare**
 Bmsit Bookshare - A web Application for sharing of Books between Students of BMSIT College
 
-<strong>Team:</strong> Roushan Agarwalla(Backend), Sahana Suresh Guttikar(FrontEnd), Tanmay Sharma(FrontEnd), Sanskriti Agrawal(FrontEnd)
+<strong>Team Members:</strong> <a href="https://www.linkedin.com/in/roushan-agarwalla-bb0564222/">Roushan Agarwalla(Backend)</a>, <a href="https://www.linkedin.com/in/sahana-guttikar-913713227">Sahana Suresh Guttikar(FrontEnd)</a>, <a href="https://www.linkedin.com/in/tanmay-sharma-10b3a8227">Tanmay Sharma(FrontEnd)</a>, <a href="https://www.linkedin.com/in/sanskriti-agrawal-8a3714227">Sanskriti Agrawal(FrontEnd)</a>
 
 <strong>Frameworks/Languages Used : </strong> HTML, CSS, Django(Python), Bootstrap.
 
