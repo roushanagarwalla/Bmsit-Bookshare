@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Details{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-evenly">
+        <div class="col-md-6">
+            <h1 class="text-center text-primary my-4">Contact Details</h1>
+            <ul>
+                <li class="c-list"><span class="c-label">Name:</span>{{ contact.rel.first_name }}  {{ contact.rel.last_name }}</li>
+                <li class="c-list"><span class="c-label">Phone Number:</span>{{ contact.mob }}</li>
+                <li class="c-list"><span class="c-label">Email Address:</span>{{ contact.rel.email }}</li>
+                <li class="c-list"><span class="c-label">Branch:</span>{{ contact.branch }}</li>
+                <li class="c-list"><span class="c-label">Semister:</span>{{ contact.sem }}</li>
+                <li class="c-list"><span class="c-label">USN:</span>{{ contact.rel.username }}</li>
+
+
+            </ul>
+            {% if request.user.id is contact.rel.id %}
+            <div class="mx-auto d-flex">
+                <a href="/update_contact/{{ request.user.id }}" class="btn btn-primary mx-auto mt-4">Update Contact</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

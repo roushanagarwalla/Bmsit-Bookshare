@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+                
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row justify-content-start">
+        {% for book in books %}
+        <div class="col-md-4 col-lg-3 my-3">
+            <div class="card">
+                <img src="{{ MEDIA_URL }}{{ book.thumbnail }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.desc }}</p>
+                    <p>Author: {{ book.author }}</p>
+                </div>                
+                {% if book.id in req_books_accepted %}
+                    <a href="/view_contact/{{ book.user.id }}" class="btn btn-primary">View Contact Details</a>
+                {% else %}
+                    {% if book.id in req_books_id %}
+                        <a class="btn btn-primary">Requested</a>
+                    {% else %}        
+                        <a href="/book_request/{{ book.id }}" class="btn btn-primary">Request Book</a>                    
+                    {% endif %}
+                {% endif %}
+                <div class="card-footer">
+                    <small class="text-muted">Posted On <em>{{ book.posted_date.date }}</em></small>
+                </div>
+            </div>        
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

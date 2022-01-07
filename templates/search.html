@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock title %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row justify-content-start">
+        <h2 class="text-center">Search Results</h2>
+        {% for book in books %}
+        <div class="col-md-3 my-3">
+            <div class="card">
+                <img src="{{ MEDIA_URL }}{{ book.thumbnail }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.desc }}</p>
+                    <p>Author: {{ book.author }}</p>
+                </div>
+                <a href="#" class="btn btn-primary">Request Book</a>
+                <div class="card-footer">
+                    <small class="text-muted">Posted On <em>{{ book.posted_date.date }}</em></small>
+                </div>
+            </div>        
+        </div>
+        {% empty %}
+            <p class="text-primary text-center">No Books Matches the Given Query</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock body %}

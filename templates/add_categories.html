@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Add category{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-evenly">
+        <div class="col-md-6">
+            <h1 class="text-center text-primary mb-4 mt-4">Add Category</h1>
+            <form method="post" action='/add_category'>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Enter Category Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Enter Category Description</label>
+                    <textarea class="form-control" id="desc" name="desc"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

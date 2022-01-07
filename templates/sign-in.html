@@ -1,0 +1,47 @@
+{% extends 'signbase.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block body %}
+<body class="signin" style="background-image: url('{% static "images/sign-in.webp" %}'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-8-col-xs-12">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow" style="background: linear-gradient(45deg, black, transparent); border: transparent ">
+          <h2 class="fw-bold mt-4 text-center" style="color: white">Sign In</h2>
+          
+          <div class="modal-body pt-0">
+            <form method="post" action='/login' enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-4" id="usn" name="usn" required autofocus/>
+                <label for="usn">Enter Your USN</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-4" id="password" name="pass" required/>
+                <label for="password">Enter the password</label>
+              </div>
+              <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign In</button>
+            <div class="login" style="color: blanchedalmond">
+              don't have a account ?
+              <a href="/signup" style="color: white; text-decoration: none">click here</a>
+            </div>
+            <hr class="my-4" />
+            <div class="row justify-content-center">
+              <div class="col-md-6 d-flex justify-content-center pb-3">  
+                <img src="{% static 'images/bmsit-logo.webp' %}" alt="" srcset=""/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+{% endblock body %}

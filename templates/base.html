@@ -1,0 +1,110 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}{% endblock title %} - BMSIT BookShare</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}">BookShare</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_book' %}">Add Book</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'category' %}">Category</a>
+              </li>
+            </ul>
+            <form class="d-flex mx-3 search_form" action='/search' method="GET">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_text">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            {% if request.user.is_authenticated %}
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">              
+              <li class="nav-item">
+                <div class="dropstart notification">
+                  <div class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <p class="mx-3 my-0 text-primary bold noti_icon" style="font-size: 25px; cursor:pointer"><i class="bi bi-bell"></i>
+                      {% if count %}
+                    <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="font-size: 11px; top: 10px">
+                      {{ count }}
+                    </span>
+                    {% endif %}
+                  </p>
+                </div>
+                  
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="top: 50px; right: 30%;">
+                    {% for req in all_request %}
+                    <li class="noti-list">
+                      <a class="dropdown-item noti-label" href="#">{{ req.sender.first_name }} requests for {{ req.book }} Book</a>
+                      <span class="noti-btn-grp">
+                        <a href="/accept/{{ req.id }}" class="btn-sm my-1 mx-1 btn-primary c-btn">Accept</a>
+                        <a href="/reject/{{ req.id }}" class="btn-sm my-1 mx-1 btn-danger c-btn">Reject</a>
+                      </span>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ request.user.first_name  }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:auto; right: 20%;">
+                  <li><a class="dropdown-item" href="{% url 'my_book' %}">MyBook</a></li>
+                  <li><a class="dropdown-item" href="/view_contact/{{ request.user.id }}">Contact Details</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>  
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <a class="btn btn-success" href="/signup">SignUp</a>
+              <a class="mx-1 btn btn-success" href="/login">LogIn</a>
+            {% endif %}
+
+          </div>
+        </div>
+      </nav>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      {% block body %}{% endblock body %}
+
+    <div class="footer mt-5 p-5">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <a href="/" class="f-link">Home</a>
+          <a href="{% url 'add_book' %}" class="f-link">AddBook</a>
+          <a href="/my_book" class="f-link">MyBook</a>
+          <a href="/view_contact/{{ user.id }}" class="f-link">Contact Details</a>
+          <a href="{% url 'category' %}" class="f-link">Categories</a>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>

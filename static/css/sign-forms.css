@@ -1,0 +1,9 @@
+.modal-body{
+    padding: 2.5rem!important;
+}
+
+@media(max-width:550px){
+    .modal-body{
+        padding: .5rem!important;
+    }
+}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Book{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-evenly">
+        <div class="col-md-6">
+            <h1 class="text-center text-primary mb-4 mt-4">Add Book</h1>
+            <form method="post" action='' enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Add Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Add Author</label>
+                    <input type="text" class="form-control" id="author" name="author">
+                </div>
+                <div class="mb-3">
+                    <label for="edition" class="form-label">Add Edition</label>
+                    <input type="text" class="form-control" id="edition" name="edition">
+                </div>
+                <div class="mb-3">
+                    <label for="cat" class="form-label">Add Category</label>
+                    <select class="form-control" name="cat" id="cat">
+                        {% for cat in cats %}
+                            <option value="{{ cat.id }}">{{ cat.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Add Description*</label>
+                    <textarea class="form-control" name="desc" id="desc" cols="30" rows="4" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="thumbnail" class="form-label">Add Thumbnail*</label>
+                    <input class="form-control form-control-sm" id="thumbnail" type="file" name="thumbnail" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

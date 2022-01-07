@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <h2 class="text-center my-5">Categories</h2>
+    
+    {% if categories is None %}
+        <p class="text-center text-danger">
+            There are no categories till Now
+        </p>
+        <div class="d-flex">
+            <a class="btn btn-primary text-center mx-auto" href="/add_category">Add Your First Category</a>
+        </div>
+        
+    {% else %}
+        <div class="d-flex">
+            <a class="btn btn-primary text-center mx-auto" href="/add_category">Add a New Category</a>
+        </div>
+        <div class="mt-5">
+            {% for category in categories %}
+                <a class="btn btn-primary m-2" href="/category/{{ category.id}}">{{ category.title }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock body %}
